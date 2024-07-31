@@ -10,13 +10,12 @@ class MyHashMap:
         self.size = 0
         self.max_threshold = max_threshold
         self.data = [None] * self.cap
-        self.deleted = [False] * self.cap  # Track deleted slots
+        self.deleted = [False] * self.cap  
 
     def hash_function(self, key):
         return hash(key) % self.cap
 
     def probe(self, index, key):
-        # Linear probing
         start_index = index
         while (self.data[index] is not None and self.data[index].key != key) or self.deleted[index]:
             index = (index + 1) % self.cap
@@ -66,13 +65,12 @@ class MyHashMap:
             if old_data[i] is not None and not old_deleted[i]:
                 self.put(old_data[i].key, old_data[i].value)
 
-# Example usage
 hash_map = MyHashMap()
 
 hash_map.put(1, 1)
 hash_map.put(2, 2)
 print(hash_map.get(1))  # return 1
 print(hash_map.get(2))  # return 2
-print(hash_map.get(3))  # return -1, since key 3 does not exist
+print(hash_map.get(3))  # return -1
 hash_map.remove(2)
-print(hash_map.get(2))  # return -1, since key 2 has been removed
+print(hash_map.get(2))  # return -1
